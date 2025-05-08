@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ephemeris Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+  <div class="max-w-3xl mx-auto mt-10 p-8 bg-white rounded-xl shadow-lg">
+    <h1 class="text-3xl font-bold text-center mb-6 text-indigo-700">🌌 Ephemeris Tracker</h1>
+
+    <form method="POST" class="space-y-4">
+      <div>
+        <label class="block font-medium">Date of Birth (UTC)</label>
+        <input name="dob" type="text" placeholder="YYYY-MM-DD HH:MM"
+               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+      </div>
+
+      <div>
+        <label class="block font-medium">Latitude</label>
+        <input name="latitude" type="text"
+               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+      </div>
+
+      <div>
+        <label class="block font-medium">Longitude</label>
+        <input name="longitude" type="text"
+               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+      </div>
+
+      <button type="submit"
+              class="w-full bg-indigo-600 text-white font-semibold py-2 px-4 rounded hover:bg-indigo-700 transition">
+        Get Planetary Positions
+      </button>
+    </form>
+
+    {% if positions %}
+    <div class="mt-8">
+      <h2 class="text-2xl font-semibold mb-4 text-indigo-600">🔭 Positions at Your Birth:</h2>
+      <ul class="space-y-2">
+        {% for item in positions %}
+        <li class="bg-gray-50 p-3 rounded shadow text-gray-800">
+          <strong>{{ item.name }}</strong>:<br>
+          RA: {{ item.ra }}<br>
+          DEC: {{ item.dec }}<br>
+          Distance: {{ item.distance }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+
+</body>
+</html>
